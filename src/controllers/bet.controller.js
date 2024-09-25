@@ -1,10 +1,11 @@
 const Bet = require('../models/bet.model');
 const User = require('../models/user.model');
+const { findByPk } = require("../database/database.mock.js");
 
 exports.placeBet = async (req, res) => {
 	const { userId, betAmount, guessedNumber } = req.body;
 	try {
-		const user = await User.findByPk(userId);
+		const user = await findByPk(User, userId);
 		if (!user) {
 			return res.status(404).json({ message: 'Usuario no encontrado' });
 		}
